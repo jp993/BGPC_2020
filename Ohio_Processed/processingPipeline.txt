@@ -1,0 +1,1 @@
+parseXML -> mergeSets (Training, Testing) -> toTimetable (Training, Testing) -> preprocess (Training, Testing) -> convertToCSV (Training, Testing) 
