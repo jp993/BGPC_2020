@@ -3,6 +3,7 @@
 clc
 clear all
 close all
+save_results=false;
 
 addpath(genpath('myfunxxx'));
 
@@ -10,7 +11,6 @@ addpath(genpath('myfunxxx'));
 %subj_vector=[559 563 570 575 588 591];
 % New subjects
 subj_vector = [540 544 552 567 584 596];
-
 
 %% Parameters Set
 PH=6;
@@ -49,12 +49,10 @@ plotFeaturesRank=0;
 % hl=results.XAtMinObjective.hl;
 % ord.cgm=results.XAtMinObjective.ord_cgm;
 
-% tutta questa parte sopra la puoi commentare e sostituire con:
 n1=5;
 hl=1;
 ord.cgm=16;
 param.extrp = 0;
-% bacini
 
 param.wind = ord.cgm;
 % BGPC rule 2:
@@ -201,17 +199,20 @@ for subj = 1:length(subj_vector)
     delay_fin_correction(subj,:) = [delay_correction];
     mae_fin_correction(subj,:) = [mae_correction];
 end
-%-- correct --%
-save rmse_subj_iter rmse_fin_correction
-save cod_subj_iter cod_fin_correction
-save delay_subj_iter delay_fin_correction
-save mae_subj_iter mae_fin_correction
 
-%-- standard --%
-save rmse_subj_iter_standard rmse_fin_standard
-save cod_subj_iter_standard cod_fin_standard
-save delay_subj_iter_standard delay_fin_standard
-save mae_subj_iter_standard mae_fin_standard
+if save_results
+    %-- correct --%
+    save rmse_subj_iter rmse_fin_correction
+    save cod_subj_iter cod_fin_correction
+    save delay_subj_iter delay_fin_correction
+    save mae_subj_iter mae_fin_correction
+
+    %-- standard --%
+    save rmse_subj_iter_standard rmse_fin_standard
+    save cod_subj_iter_standard cod_fin_standard
+    save delay_subj_iter_standard delay_fin_standard
+    save mae_subj_iter_standard mae_fin_standard
+end
 
 disp('Mean overall RMSE:')
 disp(['Standard = ',num2str(mean(rmse_total_mean))]);
